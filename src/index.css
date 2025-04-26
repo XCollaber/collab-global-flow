@@ -1,61 +1,57 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global styles */
+:root {
+  --primary-purple: #5a67d8;
+  --light-purple: #9b87f5;
+  --dark-purple: #4338ca;
+  --blue: #33C3F0;
+  --gray: #8E9196;
+  --background: #f8f9fc;
+}
 
-@layer base {
-  :root {
-    --background: 220 30% 98%;
-    --foreground: 222.2 84% 4.9%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: #222;
+  line-height: 1.6;
+}
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-    --primary: 252 56% 75%;
-    --primary-foreground: 210 40% 98%;
+/* Gradient text and backgrounds */
+.gradient-text {
+  background: linear-gradient(to right, var(--primary-purple), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-    --secondary: 240 5.9% 10%;
-    --secondary-foreground: 210 40% 98%;
+.gradient-bg {
+  background: linear-gradient(to right, var(--primary-purple), var(--blue));
+}
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 252 56% 75%;
-
-    --radius: 0.5rem;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@layer utilities {
-  .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-xc-purple to-xc-blue;
-  }
-  
-  .gradient-bg {
-    @apply bg-gradient-to-r from-xc-purple to-xc-blue;
-  }
-  
-  .gradient-bg-light {
-    @apply bg-gradient-to-r from-xc-purple/10 to-xc-blue/10;
-  }
-  
-  .highlight-gradient {
-    @apply bg-gradient-to-r from-xc-purple/20 to-xc-blue/20;
-  }
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
 }
