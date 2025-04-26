@@ -1,49 +1,48 @@
 
-import { useEffect } from "react";
-import NavBar from "@/components/NavBar";
-import HeroSection from "@/components/HeroSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import FAQSection from "@/components/FAQSection";
-import AboutSection from "@/components/AboutSection";
-import WaitlistSection from "@/components/WaitlistSection";
-import Footer from "@/components/Footer";
+import React, { useEffect } from "react";
+import NavBar from "../components/NavBar";
+import HeroSection from "../components/HeroSection";
+import HowItWorksSection from "../components/HowItWorksSection";
+import FeaturesSection from "../components/FeaturesSection";
+import FAQSection from "../components/FAQSection";
+import AboutSection from "../components/AboutSection";
+import WaitlistSection from "../components/WaitlistSection";
+import Footer from "../components/Footer";
 
 const Index = () => {
+  // Debug
+  console.log("Index component rendering");
+
   // Smooth scrolling for anchor links
   useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href') as string);
-        if (target) {
-          window.scrollTo({
-            top: (target as HTMLElement).offsetTop - 80, // Adjust for fixed navbar
-            behavior: 'smooth'
-          });
-        }
-      });
+    const handleAnchorClick = (e: Event) => {
+      const target = e.currentTarget as HTMLAnchorElement;
+      if (!target) return;
+      
+      const href = target.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        window.scrollTo({
+          top: (element as HTMLElement).offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    const anchors = document.querySelectorAll('a[href^="#"]');
+    anchors.forEach(anchor => {
+      anchor.addEventListener('click', handleAnchorClick);
     });
 
-    // Clean up event listeners on component unmount
     return () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', function(e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href') as string);
-          if (target) {
-            window.scrollTo({
-              top: (target as HTMLElement).offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
+      anchors.forEach(anchor => {
+        anchor.removeEventListener('click', handleAnchorClick);
       });
     };
   }, []);
-
-  // Add console log to help debug
-  console.log("Index component rendering");
 
   return (
     <div className="min-h-screen flex flex-col">
