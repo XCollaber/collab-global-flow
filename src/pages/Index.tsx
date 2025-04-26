@@ -24,7 +24,26 @@ const Index = () => {
         }
       });
     });
+
+    // Clean up event listeners on component unmount
+    return () => {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href') as string);
+          if (target) {
+            window.scrollTo({
+              top: (target as HTMLElement).offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    };
   }, []);
+
+  // Add console log to help debug
+  console.log("Index component rendering");
 
   return (
     <div className="min-h-screen flex flex-col">
