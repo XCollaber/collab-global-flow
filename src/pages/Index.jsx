@@ -10,27 +10,36 @@ import WaitlistSection from "../components/WaitlistSection";
 import Footer from "../components/Footer";
 
 const Index = () => {
+  // Debug
+  console.log("Index component rendering");
+
   // Smooth scrolling for anchor links
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleAnchorClick = (e) => {
+      const target = e.currentTarget;
+      if (!target) return;
+      
+      const href = target.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      
       e.preventDefault();
-      const href = e.currentTarget.getAttribute('href');
-      const target = document.querySelector(href);
-      if (target) {
+      const element = document.querySelector(href);
+      if (element) {
         window.scrollTo({
-          top: target.offsetTop - 80,
+          top: element.offsetTop - 80,
           behavior: 'smooth'
         });
       }
     };
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', handleClick);
+    const anchors = document.querySelectorAll('a[href^="#"]');
+    anchors.forEach(anchor => {
+      anchor.addEventListener('click', handleAnchorClick);
     });
 
     return () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', handleClick);
+      anchors.forEach(anchor => {
+        anchor.removeEventListener('click', handleAnchorClick);
       });
     };
   }, []);

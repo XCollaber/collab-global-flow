@@ -1,0 +1,84 @@
+
+/* Global styles */
+:root {
+  --primary-purple: #5a67d8;
+  --light-purple: #9b87f5;
+  --dark-purple: #4338ca;
+  --blue: #33C3F0;
+  --gray: #8E9196;
+  --background: #f8f9fc;
+  --xc-purple: #5a67d8;
+  --xc-blue: #33C3F0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: #222;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Gradient text and backgrounds */
+.gradient-text {
+  background: linear-gradient(to right, var(--primary-purple), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, var(--primary-purple), var(--blue));
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-light {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-pulse-light {
+  animation: pulse-light 2s infinite;
+}
+
+/* Tailwind-like utility classes */
+.backdrop-blur-md {
+  backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
